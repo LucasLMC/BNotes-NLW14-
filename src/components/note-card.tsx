@@ -4,12 +4,15 @@ import { formatDistanceToNow } from 'date-fns'
 import { X } from 'lucide-react'
 interface NodeCardProps {
     note: {
+        id: string,
         date: Date,
         content: string
     }
+
+    onNoteDeleted: (id: string) => void
 }
 
-export function NoteCard({ note }: NodeCardProps) {
+export function NoteCard({ note, onNoteDeleted }: NodeCardProps) {
     return (
         <Dialog.Root>
             <Dialog.Trigger className='
@@ -47,6 +50,7 @@ export function NoteCard({ note }: NodeCardProps) {
 
                         <button
                             type="button"
+                            onClick={() => onNoteDeleted(note.id)}
                             className="w-full py-4 text-center text-sm outline-none bg-slate-800 text-slate-300 font-medium group"
                         >
                             Deseja <span className="text-red-500 group-hover:underline">apagar esta nota?</span>
